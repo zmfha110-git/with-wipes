@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>위드 물티슈 — 직접 만드는 제조사, 11년간 안 끊긴 업소용 물티슈</title>
+<meta name="description" content="식당·카페·매장 업소용 물티슈. 도매상 없이 직접 만드는 제조사라 더 싸고, 11년간 한 번도 안 끊겼습니다. 세금계산서 발행·위생용품 신고필." />
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+<style>
+  :root {
+    --paper: #f0f3f7; --paper-2: #ffffff; --ink: #14181e; --ink-2: #4f565f;
+    --line: #e3e7ed; --blue: #0075de; --blue-dark: #005bab; --blue-soft: #d7e9fb;
+    --hot: #ff5a1f; --ok: #0fae6e; --kakao: #fee500; --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Pretendard", -apple-system, sans-serif; font-weight: 400;
+    background: var(--paper); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .num { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .wrap { width: min(1080px, 90vw); margin: 0 auto; }
+  .pad { padding: clamp(96px, 13vw, 184px) 0; }
+  .pad > .wrap, .hook .wrap, .inquiry .inner { text-align: center; }
+  .reels, .gallery, .faq, .custom, .form-grid, .hubs-grid { text-align: left; }
+  .eyebrow { display:inline-block; font-size: 15px; font-weight: 600; color: var(--ink-2); margin-bottom: 18px; }
+  h2.big { font-size: clamp(30px, 5.6vw, 66px); font-weight: 700; line-height: 1.05; }
+  h2.big b { color: var(--blue); } h2.big em { font-style: normal; }
+  .lead-sub { color: var(--ink-2); margin-top: 20px; font-size: clamp(16px,1.8vw,21px); max-width: 50ch; margin-inline:auto; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:700;
+    font-size:16px; border:none; cursor:pointer; border-radius:100px; padding: 16px 26px; text-decoration:none;
+    color: var(--ink); transition: transform .18s var(--ease), background .2s; }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--ink); color:#fff; } .btn-primary:hover { background:#000; }
+  .btn-dark { background: #ebe8e1; color: var(--ink); } .btn-dark:hover { background:#e0ddd4; }
+  .btn-kakao { background: var(--kakao); color: #3c1e1e; }
+  .btn-ghost { background: transparent; border:1.5px solid currentColor; }
+  .btn-lg { padding: 19px 32px; font-size: 17px; }
+
+  .rv { opacity:0; transform: translateY(26px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  .rv.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .rv { opacity:1 !important; transform:none !important; } }
+  .flag { background:#fff7ed; border:1px dashed var(--hot); color:#9a3412; font-size:12px; font-weight:600; border-radius:8px; padding:6px 11px; display:inline-block; }
+
+  header { position: sticky; top:0; z-index:50; background: rgba(240,243,247,.85); backdrop-filter: saturate(140%) blur(12px); border-bottom:1px solid var(--line); }
+  .nav { display:flex; align-items:center; justify-content:space-between; height:66px; }
+  .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:21px; }
+  .logo .mark { width:32px; height:32px; border-radius:9px; background:var(--blue); display:grid; place-items:center; color:#fff; font:700 16px "Pretendard"; }
+  .logo small { font-weight:600; font-size:12px; color:var(--ink-2); }
+  .nav-links { display:flex; gap:28px; }
+  .nav-links a { color:var(--ink); text-decoration:none; font-size:15px; font-weight:600; opacity:.78; }
+  .nav-links a:hover { opacity:1; color:var(--blue); }
+  @media (max-width: 900px){ .nav-links { display:none; } }
+
+  .hero { position:relative; min-height: 92svh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding: clamp(80px,10vw,120px) 0 clamp(40px,6vw,72px); overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image: linear-gradient(rgba(31,60,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(31,60,255,.05) 1px, transparent 1px);
+    background-size: clamp(48px,6vw,84px) clamp(48px,6vw,84px); mask-image: radial-gradient(110% 75% at 50% 42%, #000 30%, transparent 78%); }
+  .hero-bg::after { content:""; position:absolute; left:50%; top:30%; transform:translate(-50%,-50%); width:min(60vw,640px); aspect-ratio:1; border-radius:50%;
+    background: radial-gradient(circle, var(--blue-soft), transparent 66%); filter: blur(10px); }
+  .hero .inner { position:relative; z-index:2; }
+  .hero h1 { font-size: clamp(34px, 6.2vw, 80px); font-weight:700; line-height:1.04; max-width: 18ch; margin:0 auto; word-break: keep-all; }
+  .hero-lead { margin: clamp(20px,2.6vw,30px) auto 0; font-size: clamp(19px,2.7vw,30px); font-weight:400; color: var(--ink-2); line-height:1.42; max-width: 30ch; word-break: keep-all; }
+  .hero-lead strong { font-weight:700; color: var(--ink); }
+  .hero-meta { margin-top:16px; font-size:14px; font-weight:600; color: var(--ink-2); }
+  .hero-foot { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px; }
+  .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .hero-callback { font-size:13px; color:var(--ink-2); }
+  .scroll-cue { font-size:12px; text-transform:uppercase; color:var(--ink-2); }
+
+  .trustbar { background: var(--paper-2); color: var(--ink); padding: clamp(52px,7vw,92px) 0; border-block:1px solid var(--line); }
+  .trustbar .row { display:flex; align-items:center; justify-content:space-between; gap:18px 28px; flex-wrap:wrap; }
+  .trustbar .hl { font-size: clamp(24px,3.4vw,38px); font-weight:700; line-height:1.15; }
+  .trustbar .hl b { color: var(--blue); }
+  .trust-chips { display:flex; gap:10px; flex-wrap:wrap; }
+  .trust-chips span { font-size:13px; font-weight:600; border:1px solid var(--line); border-radius:100px; padding:9px 15px; color:var(--ink-2); }
+  .trust-chips span::before { content:"✓ "; color:var(--blue); font-weight:700; }
+  .tstats { display:grid; grid-template-columns:repeat(4,1fr); gap:36px 18px; margin-top:40px; padding-top:36px; border-top:1px solid var(--line); }
+  @media (max-width:760px){ .tstats { grid-template-columns:repeat(2,1fr); } }
+  .ts { font-size: clamp(30px,4.6vw,50px); font-weight:700; line-height:1.05; }
+  .ts .num { color:var(--blue); }
+  .ts i { display:block; font-style:normal; font-size:14px; font-weight:500; color:var(--ink-2); margin-top:14px; }
+
+  /* ===== 직접생산 허브 — v7.2 STICKY COLUMN (사진 고정 + 스크롤 따라 자동 교체) ===== */
+  .hub { background: var(--paper-2); border-block:1px solid var(--line); }
+  .hub .wrap { text-align:center; }
+  .hubs-grid { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,5vw,72px); margin-top:56px; text-align:left; align-items:start; }
+  @media (max-width:860px){ .hubs-grid { grid-template-columns:1fr; gap:0; } }
+  /* sticky photo column */
+  .hubs-photo { position: sticky; top: 96px; height: min(72vh, 560px); border-radius:16px; overflow:hidden; border:1px solid var(--line); }
+  @media (max-width:860px){ .hubs-photo { top: 80px; height: 52vh; } }
+  .hp { position:absolute; inset:0; opacity:0; transition: opacity .55s var(--ease); display:grid; place-items:end start; padding:20px; color:#fff; font-weight:700; font-size:14px; }
+  .hp.active { opacity:1; }
+  .hp::after { content: attr(data-cap); position:absolute; left:18px; bottom:16px; font-size:12px; font-weight:600; opacity:.9; }
+  .hp1 { background:linear-gradient(135deg,#0a1f3c,#1f5fa8); }
+  .hp2 { background:linear-gradient(135deg,#15140f,#4a4d57); }
+  .hp3 { background:linear-gradient(135deg,#0c3d2b,#0fae6e); }
+  .hp4 { background:linear-gradient(135deg,#2a1206,#ff5a1f); }
+  .hub-photo-flag { position:absolute; top:14px; left:14px; z-index:3; }
+  /* steps */
+  .hubs-steps { display:flex; flex-direction:column; }
+  .hubs-step { min-height: clamp(360px, 56vh, 520px); display:flex; flex-direction:column; justify-content:center; padding: 20px 0; opacity:.4; transition: opacity .4s var(--ease); }
+  .hubs-step.active { opacity:1; }
+  @media (max-width:860px){ .hubs-step { min-height:auto; padding:34px 0; opacity:1; } }
+  .hubs-step .si { font:700 15px "Pretendard"; color:var(--blue); margin-bottom:14px; letter-spacing:.04em; }
+  .hubs-step h3 { font-size: clamp(24px,3.4vw,40px); font-weight:700; line-height:1.12; word-break:keep-all; }
+  .hubs-step p { color:var(--ink-2); margin-top:14px; font-size: clamp(16px,1.8vw,19px); max-width:42ch; word-break:keep-all; }
+  /* mobile: show each step's own photo inline */
+  .hubs-step .inline-photo { display:none; }
+  @media (max-width:860px){
+    .hubs-photo { display:none; }
+    .hubs-step .inline-photo { display:block; height:40vh; border-radius:14px; margin-bottom:20px; position:relative; overflow:hidden; }
+    .hubs-step .inline-photo::after { content: attr(data-cap); position:absolute; left:16px; bottom:14px; color:#fff; font-size:12px; font-weight:600; }
+  }
+
+  .hook { background: var(--paper); padding: clamp(72px,12vw,150px) 0; }
+  .hook-title { font-size: clamp(30px,5.6vw,60px); font-weight:700; line-height:1.05; }
+  .hook-title b { color: var(--blue); }
+  .hook-sub { color:var(--ink-2); margin-top:18px; font-size: clamp(16px,1.9vw,21px); max-width:48ch; margin-inline:auto; }
+  .reels { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:42px 0 34px; }
+  @media (max-width:760px){ .reels { grid-template-columns:1fr; } }
+  .reel { background: var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:30px; }
+  .reel blockquote { font-size: clamp(18px,2.4vw,25px); font-weight:700; line-height:1.4; }
+  .reel blockquote::before { content:"“"; color: var(--blue); }
+  .reel figcaption { margin-top:18px; font-size:14px; color:var(--ink-2); font-weight:600; }
+
+  .gallery { display:grid; grid-template-columns: repeat(12,1fr); gap:16px; margin-top:48px; }
+  .plate { border-radius:12px; overflow:hidden; border:1px solid var(--line); background:var(--paper-2); display:flex; flex-direction:column; }
+  .plate .ph { flex:1; min-height:230px; }
+  .plate .meta { padding:22px 24px; }
+  .plate .meta p { color:var(--ink-2); font-size:14px; }
+  .plate .meta .tip { color:var(--blue); font-weight:700; font-size:14px; margin-top:8px; }
+  .g1 { grid-column: 1 / 8; } .g1 .ph { background:linear-gradient(135deg,#1f3cff,#7f8dff); min-height:340px; }
+  .g2 { grid-column: 8 / 13; } .g2 .ph { background:linear-gradient(135deg,#15140f,#4a4d57); }
+  .g3 { grid-column: 1 / 6; } .g3 .ph { background:linear-gradient(135deg,#0fae6e,#86e3bd); }
+  .g4 { grid-column: 6 / 13; } .g4 .ph { background:linear-gradient(135deg,#ff5a1f,#ffb38f); min-height:300px; }
+  @media (max-width:760px){ .plate { grid-column:1 / -1 !important; } .plate .ph { min-height:220px !important; } }
+
+  .custom { display:flex; justify-content:space-between; align-items:center; gap:26px; flex-wrap:wrap; border:1px solid var(--line); border-radius:16px; padding: clamp(28px,4vw,44px); }
+  .custom h3 { font-size: clamp(22px,3vw,32px); font-weight:700; }
+  .custom p { color:var(--ink-2); margin-top:8px; max-width:48ch; }
+
+  .faq { margin-top:44px; border-top:1px solid var(--line); }
+  details.q { border-bottom:1px solid var(--line); }
+  details.q summary { list-style:none; cursor:pointer; padding: 26px 0; font-size: clamp(17px,2.2vw,23px); font-weight:700; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q summary::after { content:"+"; font:700 26px "Pretendard"; color:var(--blue); transition: transform .25s var(--ease); }
+  details.q[open] summary::after { transform: rotate(45deg); }
+  details.q p { padding: 0 0 26px; color:var(--ink-2); font-size:16px; max-width:62ch; }
+
+  .inquiry { position:relative; overflow:hidden; }
+  .inquiry .glow { position:absolute; left:50%; bottom:-50%; width:120vw; aspect-ratio:2/1; transform:translateX(-50%); background: radial-gradient(ellipse at 50% 100%, var(--blue-soft), transparent 62%); z-index:0; }
+  .inquiry .inner { position:relative; z-index:2; }
+  .quick { background: var(--ink); color:#fff; border-radius:16px; padding: clamp(28px,4vw,44px); margin-top:36px; text-align:left; }
+  .quick h3 { font-size: clamp(20px,2.6vw,28px); font-weight:700; }
+  .quick p.sub { color:#b9c0e8; margin-top:8px; font-size:15px; }
+  .quick-cta { display:flex; gap:12px; margin-top:22px; flex-wrap:wrap; }
+  .quick-cta .btn { flex:1; min-width:150px; }
+  .quick-alt { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  .quick-note { font-size:13px; color:#b9c0e8; margin-top:16px; }
+  details.detail { margin-top:24px; border:1px solid var(--line); border-radius:12px; background:var(--paper-2); text-align:left; }
+  details.detail summary { padding:22px 24px; font-size:17px; font-weight:700; cursor:pointer; list-style:none; }
+  details.detail summary::-webkit-details-marker { display:none; }
+  .detail-body { padding: 0 24px 28px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:680px){ .form-grid { grid-template-columns:1fr; } }
+  .f { display:flex; flex-direction:column; gap:8px; } .f.full { grid-column:1 / -1; }
+  .f label { font-size:14px; font-weight:700; }
+  .f input, .f select, .f textarea { font-family:inherit; font-size:16px; padding:13px 15px; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); outline:none; transition:border-color .2s; }
+  .f input:focus, .f select:focus, .f textarea:focus { border-color:var(--blue); }
+  .chips { display:flex; gap:10px; flex-wrap:wrap; }
+  .chip { border:1px solid var(--line); background:#fff; border-radius:100px; padding:11px 18px; font-size:14px; font-weight:600; cursor:pointer; transition:all .2s; }
+  .chip[aria-pressed="true"] { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .form-note { font-size:13px; color:var(--ink-2); margin-top:14px; }
+  .quick-row { display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; }
+  .quick-row input { flex:1; min-width:200px; font-family:inherit; font-size:18px; padding:16px 18px; border:none; border-radius:6px; background:#fff; color:var(--ink); outline:none; }
+
+  footer { background: var(--ink); color: var(--paper); padding: 64px 0 120px; overflow:hidden; }
+  .foot-top { display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+  footer .logo { color:#fff; } footer .logo small { color:#8b91b5; }
+  .foot-contact { display:flex; flex-direction:column; gap:7px; font-size:15px; }
+  .foot-contact strong { color:#fff; font-size:18px; }
+  .foot-contact a { color:#9aa6ff; text-decoration:none; }
+  .brand-huge { font-size: clamp(72px,18vw,260px); font-weight:700; line-height:.85; margin-top:48px; color:#fff; opacity:.96; }
+  .foot-biz { font-size:13px; color:#8b91b5; margin-top:22px; line-height:1.8; }
+
+  .mobilebar { position:fixed; left:0; right:0; bottom:0; z-index:60; display:none; gap:10px; padding:10px 14px; background: rgba(244,247,251,.92); backdrop-filter:blur(12px); border-top:1px solid var(--line); }
+  .mobilebar .btn { flex:1; padding:15px; }
+  @media (max-width:900px){ .mobilebar { display:flex; } }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">W</span><span>위드 <small>업소용 물티슈</small></span></div>
+    <nav class="nav-links">
+      <a href="#hub">직접 생산</a><a href="#hook">후기</a><a href="#products">제품</a><a href="#faq">자주 묻는 질문</a><a href="#inquiry">견적문의</a>
+    </nav>
+    <a href="#inquiry" class="btn btn-primary" style="padding:11px 20px;">견적 받기</a>
+  </div>
+</header>
+
+<!-- ============ HERO (신뢰 — 방문자 가정 카피 없음) ============ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap inner">
+    <span class="eyebrow rv">식당·카페·매장 업소용 물티슈</span>
+    <h1 class="rv">11년간 4만 건+,<br /><span class="hl">한 번도 안 끊겼습니다.</span></h1>
+    <p class="hero-lead rv">도매상을 거치지 않는 <strong>직접 만드는 제조사</strong>라, 더 싸고 안 끊깁니다.</p>
+    <p class="hero-meta rv">세금계산서 발행 · 위생용품 신고필 · 무료 샘플</p>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="hero-ctas rv">
+      <a href="tel:0000000000" class="btn btn-primary btn-lg">📞 전화 문의</a>
+      <a href="#" class="btn btn-kakao btn-lg">카톡 상담</a>
+      <a href="#inquiry" class="btn btn-dark btn-lg">견적 남기기 →</a>
+    </div>
+    <span class="hero-callback rv">바로 못 받아도 카톡·견적 남겨주시면 그날 안에 연락드립니다.</span>
+  </div>
+</section>
+
+<!-- ============ TRUST STATS ============ -->
+<div class="trustbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="hl">위드를 믿는 이유, <b>숫자로.</b></div>
+      <div class="trust-chips"><span>세금계산서 발행</span><span>위생용품 신고필</span><span>무료 샘플</span></div>
+    </div>
+    <div class="tstats">
+      <div class="ts"><span class="num" data-count="11">11</span>년<i>업소용 직접 제조 외길</i></div>
+      <div class="ts"><span class="num" data-count="412">412</span>곳<i>그동안 거래한 업소</i></div>
+      <div class="ts"><span class="num" data-count="83">83</span>%<i>다시 찾는 재구매율 <span class="flag">⚠ 83 vs 99 확정</span></i></div>
+      <div class="ts"><span class="num" data-count="46976">46,976</span>건<i>누적 납품</i></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 직접생산 허브 (척추) — v7.2 STICKY ============ -->
+<section class="hub pad" id="hub">
+  <div class="wrap">
+    <span class="eyebrow rv">직접 생산</span>
+    <h2 class="big rv">위드는 유통이 아니라,<br /><b>직접 만드는 제조사</b>입니다.</h2>
+    <p class="lead-sub rv">싸고, 안 끊기고, 품질 좋고, 믿을 수 있는 이유 — 전부 여기서 나옵니다.</p>
+
+    <div class="hubs-grid">
+      <!-- sticky photo (스크롤 따라 자동 교체) -->
+      <div class="hubs-photo">
+        <span class="flag hub-photo-flag">⚠ 생산/창고 실사진으로 교체</span>
+        <div class="hp hp1 active" data-cap="생산 라인 — 자가 공장"></div>
+        <div class="hp hp2" data-cap="창고 — 직접 쌓아둔 재고"></div>
+        <div class="hp hp3" data-cap="원단·품질 — 직접 관리"></div>
+        <div class="hp hp4" data-cap="공장 전경 — 11년 같은 자리"></div>
+      </div>
+      <!-- steps -->
+      <div class="hubs-steps">
+        <div class="hubs-step active" data-i="0">
+          <div class="inline-photo hp1" data-cap="생산 라인"></div>
+          <div class="si">왜 싼가</div>
+          <h3>중간 유통이 없습니다.</h3>
+          <p>도매상을 거치지 않고 공장에서 바로 나갑니다. 중간 마진이 빠져, 같은 품질을 더 싸게 드려요.</p>
+        </div>
+        <div class="hubs-step" data-i="1">
+          <div class="inline-photo hp2" data-cap="창고"></div>
+          <div class="si">왜 안 끊기나</div>
+          <h3>11년간 결품 0.</h3>
+          <p>자가 재고를 직접 쌓아두고 공급합니다. 주문하면 바로 출고 — 11년간 한 번도 안 끊겼어요.</p>
+        </div>
+        <div class="hubs-step" data-i="2">
+          <div class="inline-photo hp3" data-cap="원단·품질"></div>
+          <div class="si">왜 품질이 일정한가</div>
+          <h3>원단부터 직접 관리.</h3>
+          <p>평량·매수·재질을 공장에서 직접 통제합니다. 받기로 한 그 규격 그대로 나갑니다.</p>
+        </div>
+        <div class="hubs-step" data-i="3">
+          <div class="inline-photo hp4" data-cap="공장 전경"></div>
+          <div class="si">왜 믿을 수 있나</div>
+          <h3>11년, 같은 자리에서.</h3>
+          <p>같은 공장에서 11년 직접 제조. 세금계산서 발행·위생용품 신고필로 거래도 깔끔합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 후기 (방문자 가정·단가 카피 제거) ============ -->
+<section class="hook" id="hook">
+  <div class="wrap">
+    <span class="eyebrow rv">이미 위드로 받는 사장님들</span>
+    <h2 class="hook-title rv">직접 만드니까,<br /><b>믿고 맡깁니다.</b></h2>
+    <p class="hook-sub rv">위드와 거래하는 사장님들의 실제 한마디. <span class="flag">⚠ 실명·동의받은 진짜 후기로 교체</span></p>
+    <div class="reels">
+      <figure class="reel rv"><blockquote>한 번도 안 끊긴 게 제일 큽니다.”</blockquote><figcaption>OO고깃집 · 하루 150석</figcaption></figure>
+      <figure class="reel rv"><blockquote>직접 만드는 데라 단가가 다릅니다.”</blockquote><figcaption>OO카페 · 2호점 운영</figcaption></figure>
+      <figure class="reel rv"><blockquote>세금계산서까지 깔끔해서 정산이 편해요.”</blockquote><figcaption>OO분식 · 프랜차이즈</figcaption></figure>
+      <figure class="reel rv"><blockquote>받기로 한 규격 그대로 와서 신뢰가 갑니다.”</blockquote><figcaption>OO호프 · 단체석 위주</figcaption></figure>
+    </div>
+    <a href="#inquiry" class="btn btn-primary btn-lg">견적 문의하기 →</a>
+  </div>
+</section>
+
+<!-- ============ 제품 갤러리 ============ -->
+<section class="pad" id="products">
+  <div class="wrap">
+    <span class="eyebrow rv">제품군</span>
+    <h2 class="big rv">쓰는 곳에 맞춰 고르세요.</h2>
+    <p class="lead-sub rv"><span class="flag">⚠ 실제 제품/창고 사진으로 교체</span></p>
+    <div class="gallery">
+      <div class="plate g1 rv"><div class="ph"></div><div class="meta"><p>손님 테이블용 위생 1인 1매. 배달 동봉에도 적합.</p><p class="tip">→ 개별포장 · 메쉬 원단</p></div></div>
+      <div class="plate g2 rv"><div class="ph"></div><div class="meta"><p>카운터·매장 비치용. 70·100매 뽑아쓰기.</p><p class="tip">→ 도톰한 평량 선택 가능</p></div></div>
+      <div class="plate g3 rv"><div class="ph"></div><div class="meta"><p>주방·청소용 대량. 400·1,000매.</p><p class="tip">→ 장당 단가 가장 낮음</p></div></div>
+      <div class="plate g4 rv"><div class="ph"></div><div class="meta"><p>직접 재고를 쌓아두고 공급합니다. 주문하면 바로 출고.</p><p class="tip">→ 안정적인 대량 공급</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 상호 인쇄 (독립 섹션 유지) ============ -->
+<section class="pad" id="custom">
+  <div class="wrap">
+    <div class="custom rv">
+      <div>
+        <h3>상호·로고 인쇄도 됩니다</h3>
+        <p>물티슈에 가게 이름·연락처·QR을 넣으면 손님이 쓰는 동안 가게가 홍보됩니다. 견적에 함께 넣어 상담하세요. <span class="flag">⚠ 초기 제작비 안내는 상담에서</span></p>
+      </div>
+      <a href="#inquiry" class="btn btn-dark btn-lg">견적에 함께 문의 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ (정기납품 Q 제거) ============ -->
+<section class="pad" id="faq" style="background:var(--paper-2); border-block:1px solid var(--line);">
+  <div class="wrap">
+    <span class="eyebrow rv">자주 묻는 질문</span>
+    <h2 class="big rv">문의 전에, <b>먼저 확인하세요.</b></h2>
+    <p class="lead-sub rv"><span class="flag">⚠ 실제 정책으로 답변 교체</span></p>
+    <div class="faq rv">
+      <details class="q"><summary>최소 주문 수량이 얼마인가요?</summary><p>도매는 보통 30박스 전후부터 가능합니다. 사용량에 맞춰 잡아드려요. 상호 인쇄(주문제작)는 별도 기준이 있습니다. <span class="flag">⚠ 실제 정책으로 교체</span></p></details>
+      <details class="q"><summary>단가가 어떻게 되나요?</summary><p>가게 사용량·규격·원단에 따라 달라서 일률 단가표는 두지 않습니다. 직접 만드는 제조사라 중간 마진이 없어 더 싸게 드릴 수 있어요. 정확한 단가는 문의 주시면 바로 안내드립니다.</p></details>
+      <details class="q"><summary>세금계산서 발행되나요?</summary><p>네. 사업자 거래 시 세금계산서를 정상 발행합니다. 사업자등록증 사본만 주시면 됩니다.</p></details>
+      <details class="q"><summary>샘플을 먼저 받아볼 수 있나요?</summary><p>가능합니다. 문의 시 "샘플 요청"을 남겨주시면 대표 규격 샘플을 보내드립니다.</p></details>
+      <details class="q"><summary>상호 인쇄는 기간이 얼마나 걸리나요?</summary><p>디자인 확정 후 보통 영업일 기준 7~10일입니다. <span class="flag">⚠ 실제 기간·비용으로 교체</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 문의 (4채널 · 전화 1순위 · 부재 콜백) ============ -->
+<section class="pad inquiry" id="inquiry">
+  <div class="glow"></div>
+  <div class="wrap inner">
+    <span class="eyebrow rv">견적 문의</span>
+    <h2 class="big rv">문의 남기시면<br /><b>그날 안에 연락드립니다.</b></h2>
+    <p class="lead-sub rv">아버지가 납품·운전 중이라 바로 못 받을 수 있어요. 못 받으면 카톡·견적을 남겨주세요 — 작업 끝나고 그날 안에 연락드립니다.</p>
+
+    <div class="quick rv">
+      <h3>가장 빠른 길 — 전화</h3>
+      <p class="sub">도매 단가·추천 수량은 통화가 제일 빠릅니다. 못 받으면 아래 카톡·견적으로 남겨주세요.</p>
+      <div class="quick-cta">
+        <a href="tel:0000000000" class="btn btn-primary btn-lg">📞 지금 전화하기</a>
+        <a href="#" class="btn btn-kakao btn-lg">💬 카카오톡 상담</a>
+      </div>
+      <form class="quick-row" id="quickForm" novalidate>
+        <input type="tel" id="quickPhone" name="phone" placeholder="전화 어려우면 번호만 남겨주세요 (010-0000-0000)" required />
+        <button type="submit" class="btn btn-dark btn-lg">번호 남기기</button>
+      </form>
+      <p class="quick-note" id="quickNote">데모 — 실제 접수하려면 전송 연동(문자/카톡) 필요.</p>
+    </div>
+
+    <details class="detail rv">
+      <summary>＋ 상세 견적으로 더 정확하게 받기 (선택)</summary>
+      <div class="detail-body">
+        <form id="inqForm" novalidate>
+          <div class="form-grid">
+            <div class="f full">
+              <label>관심 품목</label>
+              <div class="chips" id="chips" role="group" aria-label="관심 품목">
+                <button type="button" class="chip" data-v="개별포장" aria-pressed="false">개별포장</button>
+                <button type="button" class="chip" data-v="캡형" aria-pressed="false">캡형</button>
+                <button type="button" class="chip" data-v="대용량" aria-pressed="false">대용량 리필</button>
+                <button type="button" class="chip" data-v="주문제작" aria-pressed="false">주문제작(인쇄)</button>
+                <button type="button" class="chip" data-v="모름" aria-pressed="false">잘 모름 · 상담 후 추천</button>
+              </div>
+              <input type="hidden" id="items" name="items" />
+            </div>
+            <div class="f"><label for="region">지역 <span style="color:var(--hot)">*</span></label><input id="region" name="region" placeholder="예: 서울 강남구" required /></div>
+            <div class="f"><label for="qty">월 예상 사용량 <span style="color:var(--hot)">*</span></label>
+              <select id="qty" name="qty" required><option value="">선택</option><option>월 30박스 이하</option><option>월 30~50박스</option><option>월 50~100박스</option><option>월 100박스 이상</option><option>잘 모름</option></select></div>
+            <div class="f"><label for="biz">업종 (선택)</label><input id="biz" name="biz" placeholder="예: 고깃집, 카페" /></div>
+            <div class="f"><label for="phone2">연락처 <span style="color:var(--hot)">*</span></label><input id="phone2" name="phone" placeholder="010-0000-0000" required /></div>
+            <div class="f full"><label for="msg">추가 요청 (선택)</label><textarea id="msg" name="msg" rows="2" placeholder="규격·평량, 상호 인쇄, 샘플 요청 등"></textarea></div>
+            <div class="f full"><button type="submit" class="btn btn-primary btn-lg" style="width:100%;">견적 요청 보내기</button><p class="form-note" id="inqNote">데모 폼입니다 — 실제 접수하려면 form action 연동 필요.</p></div>
+          </div>
+        </form>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="logo"><span class="mark">W</span><span>위드 <small>업소용 물티슈</small></span></div>
+      <div class="foot-contact">
+        <strong>견적·상담</strong>
+        <a href="tel:0000000000">📞 000-0000-0000 <span class="flag" style="background:rgba(255,255,255,.06);border-color:#555;color:#aaa;">⚠ 아빠 직통 확인</span></a>
+        <a href="#">💬 카카오톡 채널</a>
+        <a href="mailto:hello@with-wipes.kr">✉ hello@with-wipes.kr</a>
+      </div>
+    </div>
+    <div class="brand-huge">위드</div>
+    <p class="foot-biz">
+      <span class="flag" style="background:rgba(255,255,255,.06); border-color:#555; color:#aaa;">⚠ 사업자 정보 실제값으로 교체</span><br />
+      위드 | 대표 OOO | 사업자등록번호 000-00-00000 | 위생용품 신고 제0000호<br />
+      주소 OO시 OO구 OO로 00
+    </p>
+  </div>
+</footer>
+
+<div class="mobilebar">
+  <a href="tel:0000000000" class="btn btn-primary">📞 전화</a>
+  <a href="#" class="btn btn-kakao">카톡</a>
+  <a href="#inquiry" class="btn btn-dark">견적</a>
+</div>
+
+<script>
+  /* reveal */
+  const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  /* count-up */
+  const countUp = (el)=>{ const target=+el.dataset.count.replace(/,/g,''); const dur=700, t0=performance.now();
+    const tick=(t)=>{const p=Math.min((t-t0)/dur,1); const e=1-Math.pow(1-p,3); el.textContent=Math.round(target*e).toLocaleString(); if(p<1)requestAnimationFrame(tick);}; requestAnimationFrame(tick); };
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+    document.querySelectorAll('[data-count]').forEach(el=>{el.textContent='0';cio.observe(el);});
+  }
+
+  /* ===== v7.2 STICKY HUB: 스크롤 따라 사진 자동 교체 ===== */
+  const photos = document.querySelectorAll('.hubs-photo .hp');
+  const steps = document.querySelectorAll('.hubs-step');
+  const stepIO = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      const i = +e.target.dataset.i;
+      steps.forEach(s=>s.classList.toggle('active', s===e.target));
+      photos.forEach((p,pi)=>p.classList.toggle('active', pi===i));
+    }});
+  },{threshold:.6, rootMargin:'-20% 0px -20% 0px'});
+  steps.forEach(s=>stepIO.observe(s));
+
+  /* chips */
+  const chips=document.getElementById('chips'), itemsInput=document.getElementById('items');
+  chips.addEventListener('click',(e)=>{const c=e.target.closest('.chip'); if(!c)return;
+    const on=c.getAttribute('aria-pressed')==='true'; c.setAttribute('aria-pressed',String(!on));
+    itemsInput.value=[...chips.querySelectorAll('[aria-pressed="true"]')].map(x=>x.dataset.v).join(', ');});
+
+  /* forms */
+  document.getElementById('quickForm').addEventListener('submit',(e)=>{e.preventDefault();
+    const v=document.getElementById('quickPhone').value.trim(); const n=document.getElementById('quickNote');
+    if(!v){n.textContent='전화번호를 입력해 주세요.';n.style.color='#ffb38f';return;}
+    e.target.querySelector('button').textContent='남겨짐 ✓'; n.textContent=`고맙습니다! ${v} 로 그날 안에 연락드릴게요. (데모)`; n.style.color='#86e3bd';});
+  document.getElementById('inqForm').addEventListener('submit',(e)=>{e.preventDefault();
+    const region=document.getElementById('region').value.trim(), qty=document.getElementById('qty').value, phone=document.getElementById('phone2').value.trim();
+    const n=document.getElementById('inqNote');
+    if(!region||!qty||!phone){n.textContent='지역·월 사용량·연락처는 필수입니다.';n.style.color='var(--hot)';return;}
+    e.target.querySelector('button').textContent='접수되었습니다 ✓'; n.textContent=`고맙습니다! ${phone} 로 그날 안에 견적 회신드릴게요. (데모)`; n.style.color='var(--ok)';});
+</script>
+</body>
+</html>

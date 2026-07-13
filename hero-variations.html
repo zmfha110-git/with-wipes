@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>위드 히어로 — CTA 레이아웃 3안 비교</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root { --paper:#f0f3f7; --paper-2:#fff; --ink:#14181e; --ink-2:#4f565f; --line:#e3e7ed;
+    --blue:#0075de; --blue-soft:#d7e9fb; --kakao:#fee500; --ease:cubic-bezier(.2,.7,.2,1); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Pretendard",-apple-system,sans-serif; background:var(--paper); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap { width:min(1080px,90vw); margin:0 auto; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:700;
+    font-size:16px; border:none; cursor:pointer; border-radius:100px; padding:16px 26px; text-decoration:none; color:var(--ink);
+    transition:transform .18s var(--ease), background .2s; }
+  .btn:active { transform:scale(.97); }
+  .btn-primary { background:var(--ink); color:#fff; } .btn-primary:hover { background:#000; }
+  .btn-dark { background:#ebe8e1; color:var(--ink); }
+  .btn-kakao { background:var(--kakao); color:#3c1e1e; }
+  .btn-ghost { background:transparent; border:1.5px solid var(--line); color:var(--ink); }
+  .btn-lg { padding:19px 32px; font-size:17px; }
+
+  /* label between variants */
+  .vlabel { background:var(--ink); color:#fff; text-align:center; padding:14px; font-size:14px; font-weight:700; letter-spacing:.02em; }
+  .vlabel small { display:block; font-weight:500; color:#9aa6ff; margin-top:4px; font-size:12.5px; }
+
+  /* hero (compact for comparison) */
+  .hero { position:relative; min-height:74svh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,64px); overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:linear-gradient(rgba(31,60,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(31,60,255,.05) 1px,transparent 1px);
+    background-size:clamp(48px,6vw,84px) clamp(48px,6vw,84px); mask-image:radial-gradient(110% 75% at 50% 42%,#000 30%,transparent 78%); }
+  .hero-bg::after { content:""; position:absolute; left:50%; top:32%; transform:translate(-50%,-50%); width:min(60vw,560px); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle,var(--blue-soft),transparent 66%); filter:blur(10px); }
+  .hero .inner { position:relative; z-index:2; }
+  .eyebrow { display:inline-block; font-size:15px; font-weight:600; color:var(--ink-2); margin-bottom:16px; }
+  .hero h1 { font-size:clamp(32px,5.6vw,72px); font-weight:700; line-height:1.04; max-width:18ch; margin:0 auto; word-break:keep-all; }
+  .hero-lead { margin:clamp(18px,2.4vw,26px) auto 0; font-size:clamp(18px,2.4vw,27px); font-weight:400; color:var(--ink-2); line-height:1.42; max-width:30ch; word-break:keep-all; }
+  .hero-lead strong { font-weight:700; color:var(--ink); }
+  .hero-meta { margin-top:14px; font-size:14px; font-weight:600; color:var(--ink-2); }
+  .hero-foot { position:relative; z-index:2; margin-top:36px; }
+
+  /* ===== A. 위계형 — 전화 1개 강조 + 보조 텍스트링크 ===== */
+  .cta-a { display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .cta-a .cta-sub { font-size:15px; color:var(--ink-2); }
+  .cta-a .cta-sub a { color:var(--ink); font-weight:700; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line); }
+  .cta-a .cta-sub a:hover { text-decoration-color:var(--blue); color:var(--blue); }
+
+  /* ===== B. 스택형 — 전화 풀폭 + 보조 2개 나란히 ===== */
+  .cta-b { display:flex; flex-direction:column; align-items:center; gap:12px; width:min(420px,86vw); margin:0 auto; }
+  .cta-b .cta-b-main { width:100%; }
+  .cta-b .cta-b-row { display:flex; gap:10px; width:100%; }
+  .cta-b .cta-b-row .btn { flex:1; }
+
+  /* ===== C. 묶음형 — 전화·카톡 연락 쌍 + 견적 강등 링크 ===== */
+  .cta-c { display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .cta-c .cta-c-pair { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .cta-c .cta-c-link { font-size:15px; color:var(--ink-2); text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line); }
+  .cta-c .cta-c-link:hover { color:var(--blue); text-decoration-color:var(--blue); }
+
+  .callback { font-size:13px; color:var(--ink-2); margin-top:16px; }
+
+  /* current (참고용 — 지금 v7.1) */
+  .cta-now { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+</style>
+</head>
+<body>
+
+<!-- ===== 참고: 현재 v7.1 (3개 일렬) ===== -->
+<div class="vlabel">현재 v7.1 — 3개 일렬 <small>위계 없음 · 전화 1순위가 안 드러남 (비교 기준)</small></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap inner">
+    <span class="eyebrow">식당·카페·매장 업소용 물티슈</span>
+    <h1>11년간 4만 건+,<br /><span>한 번도 안 끊겼습니다.</span></h1>
+    <p class="hero-lead">도매상을 거치지 않는 <strong>직접 만드는 제조사</strong>라, 더 싸고 안 끊깁니다.</p>
+    <p class="hero-meta">세금계산서 발행 · 위생용품 신고필 · 무료 샘플</p>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="cta-now">
+      <a href="tel:0" class="btn btn-primary btn-lg">📞 전화 문의</a>
+      <a href="#" class="btn btn-kakao btn-lg">카톡 상담</a>
+      <a href="#" class="btn btn-dark btn-lg">견적 남기기 →</a>
+    </div>
+    <p class="callback">바로 못 받아도 카톡·견적 남겨주시면 그날 안에 연락드립니다.</p>
+  </div>
+</section>
+
+<!-- ===== A. 위계형 ===== -->
+<div class="vlabel">A. 위계형 <small>전화 1개만 크게 강조 + 카톡·견적은 작은 텍스트링크 · 가장 깔끔, 전화 1순위 또렷</small></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap inner">
+    <span class="eyebrow">식당·카페·매장 업소용 물티슈</span>
+    <h1>11년간 4만 건+,<br /><span>한 번도 안 끊겼습니다.</span></h1>
+    <p class="hero-lead">도매상을 거치지 않는 <strong>직접 만드는 제조사</strong>라, 더 싸고 안 끊깁니다.</p>
+    <p class="hero-meta">세금계산서 발행 · 위생용품 신고필 · 무료 샘플</p>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="cta-a">
+      <a href="tel:0" class="btn btn-primary btn-lg">📞 전화 문의</a>
+      <p class="cta-sub">또는 <a href="#">카톡 상담</a> · <a href="#">견적 남기기</a></p>
+    </div>
+    <p class="callback">바로 못 받아도 카톡·견적 남겨주시면 그날 안에 연락드립니다.</p>
+  </div>
+</section>
+
+<!-- ===== B. 스택형 ===== -->
+<div class="vlabel">B. 스택형 <small>전화 풀폭 버튼 + 그 아래 카톡·견적 나란히 · 모바일 친화, 터치 영역 큼</small></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap inner">
+    <span class="eyebrow">식당·카페·매장 업소용 물티슈</span>
+    <h1>11년간 4만 건+,<br /><span>한 번도 안 끊겼습니다.</span></h1>
+    <p class="hero-lead">도매상을 거치지 않는 <strong>직접 만드는 제조사</strong>라, 더 싸고 안 끊깁니다.</p>
+    <p class="hero-meta">세금계산서 발행 · 위생용품 신고필 · 무료 샘플</p>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="cta-b">
+      <a href="tel:0" class="btn btn-primary btn-lg cta-b-main">📞 전화 문의</a>
+      <div class="cta-b-row">
+        <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
+        <a href="#" class="btn btn-ghost">견적 남기기</a>
+      </div>
+    </div>
+    <p class="callback">바로 못 받아도 카톡·견적 남겨주시면 그날 안에 연락드립니다.</p>
+  </div>
+</section>
+
+<!-- ===== C. 묶음형 ===== -->
+<div class="vlabel">C. 묶음형 <small>전화·카톡 = 즉시 연락 한 쌍으로 묶고, 견적은 아래 링크로 강등 · 채널 성격별 묶음</small></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap inner">
+    <span class="eyebrow">식당·카페·매장 업소용 물티슈</span>
+    <h1>11년간 4만 건+,<br /><span>한 번도 안 끊겼습니다.</span></h1>
+    <p class="hero-lead">도매상을 거치지 않는 <strong>직접 만드는 제조사</strong>라, 더 싸고 안 끊깁니다.</p>
+    <p class="hero-meta">세금계산서 발행 · 위생용품 신고필 · 무료 샘플</p>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="cta-c">
+      <div class="cta-c-pair">
+        <a href="tel:0" class="btn btn-primary btn-lg">📞 전화</a>
+        <a href="#" class="btn btn-kakao btn-lg">💬 카톡</a>
+      </div>
+      <a href="#" class="cta-c-link">전화·카톡이 어려우면, 견적 남기기 →</a>
+    </div>
+    <p class="callback">바로 못 받아도 그날 안에 연락드립니다.</p>
+  </div>
+</section>
+
+</body>
+</html>
