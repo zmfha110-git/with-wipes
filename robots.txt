@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+Disallow: /index-v2.html
+Disallow: /index-v3.html
+
+# AI crawlers welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://zmfha110-git.github.io/with-wipes/sitemap.xml
