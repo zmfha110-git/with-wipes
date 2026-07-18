@@ -15,7 +15,7 @@
   "@type": "LocalBusiness",
   "name": "위드",
   "description": "도매상을 거치지 않고 직접 만드는 업소용 물티슈 제조사. 개별포장·묶음형(덕용)·미니물티슈·건티슈, 상호·로고 인쇄 제작.",
-  "telephone": "+82-10-3971-5696",
+  "telephone": ["+82-10-3971-5696", "+82-32-568-5696"],
   "email": "with070820@daum.net",
   "foundingDate": "2012",
   "address": {
@@ -311,6 +311,8 @@
     object-fit: cover; display: block;
   }
   .plate .ph.has-img::after { display: none; }
+  /* 상세컷 — 대표컷 아래 상시 노출 (상호작용 없음) */
+  .plate .ph-sub { margin-top: 12px; }
   .g1 .ph { background: linear-gradient(165deg, #f4f6f8, #e5e9ee); }
   .g2 .ph { background: linear-gradient(165deg, #f2f4f6, #e2e6eb); }
   .g3 .ph { background: linear-gradient(165deg, #f3f5f7, #e4e8ec); }
@@ -435,8 +437,8 @@
     text-decoration: none; font-variant-numeric: tabular-nums;
   }
   .inq-tel:hover { text-decoration: underline; text-underline-offset: 6px; }
-  .inq-alt .note { margin-top: 10px; font-size: 13.5px; color: var(--faint); word-break: keep-all; }
-  .inq-alt .note a { font-weight: 600; color: var(--ink-2); text-underline-offset: 3px; }
+  .inq-alt .note { margin-top: 10px; font-size: 15.5px; color: var(--faint); word-break: keep-all; }
+  .inq-alt .note a { font-weight: 600; color: var(--ink); text-underline-offset: 3px; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media (max-width: 680px) { .form-grid { grid-template-columns: 1fr; } }
   .f { display: flex; flex-direction: column; gap: 8px; } .f.full { grid-column: 1 / -1; }
@@ -530,7 +532,7 @@
     <div class="hero-ctas rv" style="--d:.42s">
       <a href="#inquiry" class="btn btn-primary btn-lg">견적 문의하기</a>
     </div>
-    <p class="hero-tel rv" style="--d:.52s">또는 전화 010-3971-5696</p>
+    <p class="hero-tel rv" style="--d:.52s">또는 전화 010-3971-5696 · 032-568-5696</p>
   </div>
   <div class="mq rv" style="--d:.6s" aria-hidden="true">
     <div class="mq-track" id="mqTrack">
@@ -618,7 +620,7 @@
       <figure class="rcard"><blockquote>“도톰한 걸로 바꾸니 컴플레인이 줄었어요.”</blockquote><figcaption>OO족발 · 포장 전문</figcaption></figure>
       <figure class="rcard"><blockquote>“14년 하신 분이라 그런지 얘기가 통합니다.”</blockquote><figcaption>OO중식당 · 홀 80석</figcaption></figure>
       <figure class="rcard"><blockquote>“물량이 많아도 재고가 밀리지 않아요.”</blockquote><figcaption>OO뷔페 · 단체 전문</figcaption></figure>
-      <figure class="rcard"><blockquote>“가격 물어보면 그날 안에 답이 옵니다.”</blockquote><figcaption>OO포차 · 심야 영업</figcaption></figure>
+      <figure class="rcard"><blockquote>“가격 물어보면 답이 바로 옵니다.”</blockquote><figcaption>OO포차 · 심야 영업</figcaption></figure>
     </div>
   </div>
 
@@ -640,6 +642,7 @@
       <div class="plate rv g2" style="--d:.1s">
         <h3>묶음형(덕용)</h3>
         <div class="ph has-img" data-label="묶음형" data-speed="1"><img src="images/web/bulk.png" alt="묶음형(덕용) 물티슈" loading="lazy" /></div>
+        <div class="ph ph-sub has-img" data-label="묶음형 상세" data-speed="0"><img src="images/덕용_상세컷_0716.png" alt="묶음형(덕용) 상세컷" loading="lazy" /></div>
         <div class="meta"><p>주방·매장 비치용 대량 묶음. 필요한 만큼 뽑아 씁니다.</p></div>
       </div>
       <div class="plate rv g3" style="--d:.2s">
@@ -650,6 +653,7 @@
       <div class="plate rv g4" style="--d:.3s">
         <h3>건티슈</h3>
         <div class="ph has-img" data-label="건티슈" data-speed="1"><img src="images/web/dry-tissue.png" alt="건티슈" loading="lazy" /></div>
+        <div class="ph ph-sub has-img" data-label="건티슈 상세" data-speed="0"><img src="images/건티슈_박스이미지_0716.png" alt="건티슈 박스" loading="lazy" /></div>
         <div class="meta"><p>물기 없는 마른 티슈. 물티슈와 세트로도 주문 가능합니다.</p></div>
       </div>
     </div>
@@ -670,7 +674,6 @@
         <div class="fabgrid">
           <div class="fab rv">
             <h5>메쉬</h5>
-            <p class="fab-sub">결이 읽히는 타입</p>
             <div class="fab-swatch"><img src="images/web/fabric-mesh.png" alt="메쉬 원단 상세" loading="lazy" /></div>
             <div class="fab-gsm">
               <div class="gsm-badges">
@@ -680,7 +683,6 @@
           </div>
           <div class="fab rv" style="--d:.1s">
             <h5>헤링본</h5>
-            <p class="fab-sub">결 패턴이 보이는 타입</p>
             <div class="fab-swatch"><img src="images/web/fabric-herringbone.png" alt="헤링본 원단 상세" loading="lazy" /></div>
             <div class="fab-gsm">
               <div class="gsm-badges">
@@ -690,7 +692,6 @@
           </div>
           <div class="fab rv" style="--d:.2s">
             <h5>엠보</h5>
-            <p class="fab-sub">표면감이 느껴지는 타입</p>
             <div class="fab-swatch"><img src="images/web/fabric-embossed.png" alt="엠보 원단 상세" loading="lazy" /></div>
             <div class="fab-gsm">
               <div class="gsm-badges">
@@ -754,7 +755,7 @@
 <!-- ============ 문의 ============ -->
 <section class="inquiry" id="inquiry">
   <div class="wrap">
-    <h2 class="big rv">문의 남기시면<br />그날 안에 연락드립니다</h2>
+    <h2 class="big rv">문의 남기시면<br />연락드립니다</h2>
 
     <div class="inq-panel rv" style="--d:.16s">
       <form id="inqForm" novalidate>
@@ -788,8 +789,9 @@
 
     <div class="inq-alt rv" style="--d:.24s">
       <div class="or"><span>또는 전화로</span></div>
-      <a class="inq-tel" href="tel:01039715696">010-3971-5696</a>
+      <a class="inq-tel" href="tel:01039715696">010-3971-5696</a> <a class="inq-tel" href="tel:0325685696">032-568-5696</a>
       <p class="note"><a href="mailto:with070820@daum.net">with070820@daum.net</a></p>
+      <p class="note">소량 구매는 스토어에서 바로 하실 수 있습니다 — <a href="https://smartstore.naver.com/with070820" target="_blank" rel="noopener">네이버 스마트스토어</a> · <a href="https://www.coupang.com/vp/products/9586430689?vendorItemId=89424666837" target="_blank" rel="noopener">쿠팡</a></p>
     </div>
   </div>
 </section>
@@ -816,7 +818,10 @@
         <h4>견적·상담</h4>
         <ul>
           <li><a class="foot-tel" href="tel:01039715696">010-3971-5696</a></li>
+          <li><a class="foot-tel" href="tel:0325685696">032-568-5696</a></li>
           <li><a href="mailto:with070820@daum.net">with070820@daum.net</a></li>
+          <li><a href="https://smartstore.naver.com/with070820" target="_blank" rel="noopener">네이버 스마트스토어</a></li>
+          <li><a href="https://www.coupang.com/vp/products/9586430689?vendorItemId=89424666837" target="_blank" rel="noopener">쿠팡</a></li>
         </ul>
       </div>
     </div>
@@ -990,7 +995,7 @@
     const btn = form.querySelector('button'); btn.disabled = true;
     try {
       await sendToFormspree(form);
-      btn.textContent = '접수되었습니다 ✓'; n.textContent = `고맙습니다! ${phone} 로 그날 안에 견적 회신드릴게요.`; n.style.color = 'var(--ok)';
+      btn.textContent = '접수되었습니다 ✓'; n.textContent = `고맙습니다! ${phone} 로 견적 회신드릴게요.`; n.style.color = 'var(--ok)';
     } catch {
       btn.disabled = false; n.textContent = '전송에 실패했어요. 전화로 문의해 주세요.'; n.style.color = 'var(--hot)';
     }
